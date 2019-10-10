@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="41f4c3fc-121f-490a-b909-0643e443c6e3" discardOkResults="false" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="Få tillbaka rätt antal produkter" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="" zephyrTestName="" zephyrTestId="" xmlns:con="http://eviware.com/soapui/config">
+  <con:description>The test case generated for the REST resource [Api] located at [/api/]</con:description>
+  <con:settings>
+    <con:setting id="41f4c3fc-121f-490a-b909-0643e443c6e3fileName">Få-tillbaka-rätt-antal-produkter</con:setting>
+  </con:settings>
+  <con:savedRecentRuns>1</con:savedRecentRuns>
+  <con:testStep type="datasource" name="DataSource" id="0ea3e285-59b6-4393-9435-db9f221b28f3">
+    <con:settings/>
+    <con:config xsi:type="con:DataSourceStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:dataSource type="Excel">
+        <con:configuration>
+          <file>//nackademin.local/DFSroot/Home Studenter/Homes syh18/sual1801/Mina datakällor/Bok1.xlsx</file>
+          <worksheet>Blad1</worksheet>
+          <cell>A2</cell>
+          <ignoreEmpty>false</ignoreEmpty>
+          <evaluateFormulas>false</evaluateFormulas>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>id</con:property>
+      <con:property>name</con:property>
+      <con:property>description</con:property>
+      <con:property>price</con:property>
+      <con:completeLastOperation>true</con:completeLastOperation>
+      <con:restartOnRun>true</con:restartOnRun>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="antalProdukt" id="0af2e3a6-6a4e-4f5d-abd2-a81924d12eb6">
+    <con:settings/>
+    <con:config service="http://jbjork.nu" resourcePath="/api/" methodName="Api" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="antalProdukt" id="e09ef0e2-f013-46e8-9374-b033108d25b5" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://jbjork.nu</con:endpoint>
+        <con:request/>
+        <con:originalUri>http://jbjork.nu/api/</con:originalUri>
+        <con:assertion type="JsonPath Count" id="ab156945-6053-42f4-aecb-85fe5ab4309b" name="JSONPath Count">
+          <con:configuration>
+            <path>$</path>
+            <content>24</content>
+            <allowWildcards>false</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="groovy" name="Groovy Script" id="e9d0c980-5c99-4e32-83b5-147e6d8c64ee">
+    <con:settings/>
+    <con:config>
+      <script>def testStep = testRunner.testCase.getTestStepByName("DataSource")
+def responseAsXml = context.expand( '${antalProdukt#ResponseAsXml#//Response[1]}' )
+
+
+testStep.repositionAtStartRow(testRunner, context);
+
+while(testStep.next(testRunner, context)){
+	log.info(testStep.getPropertyValue("name"))
+	assert (responseAsXml.contains(testStep.getPropertyValue("name")))
+}</script>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasourceloop" name="DataSource Loop" id="bf733f28-11ab-4d49-af05-a3b9f33a6467">
+    <con:settings/>
+    <con:config>
+      <dataSourceStep>DataSource</dataSourceStep>
+      <targetStep>antalProdukt</targetStep>
+      <discardResults>true</discardResults>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+  <con:breakPoints>
+    <con:testStepId>0ea3e285-59b6-4393-9435-db9f221b28f3</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+  <con:breakPoints>
+    <con:testStepId>e9d0c980-5c99-4e32-83b5-147e6d8c64ee</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+</con:testCase>

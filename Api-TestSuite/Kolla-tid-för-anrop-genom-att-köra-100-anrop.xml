@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="0c225443-3cbb-412d-aded-3139c7ba652c" discardOkResults="false" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="Kolla tid för anrop genom att köra 100 anrop" searchProperties="true" timeout="0" xmlns:con="http://eviware.com/soapui/config">
+  <con:description>The test case generated for the REST resource [Api] located at [/api/]</con:description>
+  <con:settings>
+    <con:setting id="0c225443-3cbb-412d-aded-3139c7ba652cfileName">Kolla-tid-för-anrop-genom-att-köra-100-anrop</con:setting>
+  </con:settings>
+  <con:savedRecentRuns>1</con:savedRecentRuns>
+  <con:testStep type="restrequest" name="Request 1" id="6e41df60-8716-4d20-90c9-24cfeaccea61">
+    <con:settings/>
+    <con:config service="http://jbjork.nu" resourcePath="/api/" methodName="Api" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="Request 1" id="e09ef0e2-f013-46e8-9374-b033108d25b5" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://jbjork.nu</con:endpoint>
+        <con:request/>
+        <con:originalUri>http://jbjork.nu/api/</con:originalUri>
+        <con:credentials>
+          <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="groovy" name="Groovy Script" id="8d1f2c85-27f8-4fc3-a0cb-b19ca25f36f7">
+    <con:settings/>
+    <con:config>
+      <script>teststepAPI1 = testRunner.testCase.testSuite.getTestCaseByName("Få tillbaka en lista på alla produkter")
+teststepAPI2 = testRunner.testCase.testSuite.getTestCaseByName("Få tillbaka rätt antal produkter");
+
+
+ for(int i = 0; i &lt;100; i++)
+{
+	result1 = teststepAPI1.run(new com.eviware.soapui.support.types.StringToObjectMap (),false).getStatus()
+	result2 = teststepAPI2.run(new com.eviware.soapui.support.types.StringToObjectMap (),false).getStatus()
+
+	log.info("Testcase 1 -Få tillbaka en lista på alla produkter: " + result1 +", varv " + (i + 1))
+	log.info("Testcase 2 -Få tillbaka rätt antal produkter:         " + result2 +", varv " + (i + 1))
+}</script>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+  <con:breakPoints>
+    <con:testStepId>8d1f2c85-27f8-4fc3-a0cb-b19ca25f36f7</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+</con:testCase>

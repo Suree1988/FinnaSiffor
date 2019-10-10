@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="dce0a381-3e03-4e5f-bcde-e1778abaa277" discardOkResults="false" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="Få tillbaka en lista på alla produkter" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="" zephyrTestName="" zephyrTestId="" xmlns:con="http://eviware.com/soapui/config">
+  <con:description>The test case generated for the REST resource [Api] located at [/api/]</con:description>
+  <con:settings>
+    <con:setting id="dce0a381-3e03-4e5f-bcde-e1778abaa277fileName">Få-tillbaka-en-lista-på-alla-produkter</con:setting>
+  </con:settings>
+  <con:savedRecentRuns>1</con:savedRecentRuns>
+  <con:testStep type="datasource" name="DataSource" id="b666f61f-b843-4143-b2cb-4835b72ffd57">
+    <con:settings/>
+    <con:config xsi:type="con:DataSourceStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:dataSource type="Excel">
+        <con:configuration>
+          <file>//nackademin.local/DFSroot/Home Studenter/Homes syh18/sual1801/Mina datakällor/Bok1.xlsx</file>
+          <worksheet>Blad1</worksheet>
+          <cell>A2</cell>
+          <ignoreEmpty>false</ignoreEmpty>
+          <evaluateFormulas>false</evaluateFormulas>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>id</con:property>
+      <con:property>name</con:property>
+      <con:property>description</con:property>
+      <con:property>price</con:property>
+      <con:completeLastOperation>true</con:completeLastOperation>
+      <con:restartOnRun>true</con:restartOnRun>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Request 1" id="ec933d2c-475b-460a-b965-00324579b712">
+    <con:settings/>
+    <con:config service="http://jbjork.nu" resourcePath="/api/" methodName="Api" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:restRequest name="Request 1" id="e09ef0e2-f013-46e8-9374-b033108d25b5" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://jbjork.nu</con:endpoint>
+        <con:request/>
+        <con:originalUri>http://jbjork.nu/api/</con:originalUri>
+        <con:credentials>
+          <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters/>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="groovy" name="Groovy Script" id="6473eb13-21fc-4647-bcfe-3f4aa9dc9ff7">
+    <con:settings/>
+    <con:config>
+      <script>def testStep = testRunner.testCase.getTestStepByName("DataSource")
+def responseAsXml = context.expand( '${Request 1#ResponseAsXml#//Response[1]}' )
+
+
+
+testStep.repositionAtStartRow(testRunner, context);
+
+while(testStep.next(testRunner, context)){
+	log.info(testStep.getPropertyValue("name"))
+	assert (responseAsXml.contains(testStep.getPropertyValue("name")))
+}</script>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasourceloop" name="DataSource Loop" id="9ff54ef3-4de7-4f00-8604-035d1095ba76">
+    <con:settings/>
+    <con:config>
+      <dataSourceStep>DataSource</dataSourceStep>
+      <targetStep>Request 1</targetStep>
+      <discardResults>true</discardResults>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+  <con:breakPoints>
+    <con:testStepId>b666f61f-b843-4143-b2cb-4835b72ffd57</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+  <con:breakPoints>
+    <con:testStepId>6473eb13-21fc-4647-bcfe-3f4aa9dc9ff7</con:testStepId>
+    <con:status>NONE</con:status>
+    <con:properties/>
+  </con:breakPoints>
+</con:testCase>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testSuite id="efa85c32-2471-4440-8ad6-b8e42ebb94d9" name="Api-TestSuite" xmlns:con="http://eviware.com/soapui/config">
+  <con:description>The test suite generated for the REST service [http://jbjork.nu]</con:description>
+  <con:settings>
+    <con:setting id="IncludeOverview">true</con:setting>
+    <con:setting id="IncludeResults">true</con:setting>
+    <con:setting id="FlowLayout">false</con:setting>
+    <con:setting id="ErrorDetails">true</con:setting>
+    <con:setting id="IncludeCoverage">true</con:setting>
+    <con:setting id="GeneratableJUnitReport@Style">Multiple Pages</con:setting>
+    <con:setting id="GeneratableJUnitReport@Folder">\\nackademin.local\DFSroot\Home Studenter\Homes syh18\sual1801\Mina datakällor</con:setting>
+    <con:setting id="efa85c32-2471-4440-8ad6-b8e42ebb94d9fileName">Api-TestSuite</con:setting>
+  </con:settings>
+  <con:savedRecentRuns>1</con:savedRecentRuns>
+  <con:runType>SEQUENTIAL</con:runType>
+  <con:properties/>
+  <con:reportParameters/>
+</con:testSuite>

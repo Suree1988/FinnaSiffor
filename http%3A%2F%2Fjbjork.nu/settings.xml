@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:interface xsi:type="con:RestService" id="f403b118-4d1e-4324-a991-daae3b5f5736" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://jbjork.nu" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="f403b118-4d1e-4324-a991-daae3b5f5736fileName">http%3A%2F%2Fjbjork.nu</con:setting>
+  </con:settings>
+  <con:definitionCache type="TEXT" rootPart=""/>
+  <con:endpoints>
+    <con:endpoint>http://jbjork.nu</con:endpoint>
+  </con:endpoints>
+</con:interface>
